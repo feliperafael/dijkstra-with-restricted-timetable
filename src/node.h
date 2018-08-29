@@ -24,10 +24,18 @@ class node
         void setStartRestrictionTime(timestamp * time);
         void setEndRestrictionTime(timestamp * time);
         void setIdPrevious(int id);
-        void setEvaluated(int evaluated);
+        void setEvaluated(bool evaluated);
         void setNextNode(node * n);
         void setStartEdge(edge * e);
+        void setDistance(int d);
 
+        void start();
+        void next();
+        edge * current();
+
+        bool check_range_restricion(timestamp * t); // verifica se a hora passada por parametro está  dentro da restrição de horario do no
+        int check_range_restricion_minute(int m);
+        int time_waiting(int m);
         virtual ~node();
 
     protected:
@@ -38,9 +46,10 @@ class node
         timestamp * end_restriction_time;
         int id_previous;
         int distance;
-        int evaluated; // 1 = true - 0 = false
+        bool evaluated; // 1 = true - 0 = false
         node * next_node;
         edge * start_edge;
+        edge * it;
 };
 
 #endif // NODE_H

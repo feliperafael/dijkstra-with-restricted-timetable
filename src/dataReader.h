@@ -5,6 +5,7 @@
 #include <fstream>
 #include <string>
 #include "graph.h"
+#include "timestamp.h"
 /*
     Description: This class is responsible for reading data from the input file.
 */
@@ -16,7 +17,9 @@ class dataReader
     public:
         dataReader();
 
-        int num_nodes, num_edges, sorce_node, destiny_node, departure_time;
+        int num_nodes, num_edges, sorce_node, destiny_node;
+
+        timestamp * departure_time;
 
         graph * readGraph(const string file_path);
         virtual ~dataReader();

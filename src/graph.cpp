@@ -29,9 +29,32 @@ void graph::insertNode(node * n){
 
 }
 
+void graph::start(){
+    this->it = this->start_node;
+}
+void graph::next(){
+    this->it = it->getNextNode();
+}
+
+node * graph::current(){
+    return this->it;
+}
+
+bool graph::visited(){
+    node * s = this->start_node;
+
+    while(s != NULL){
+        if(s->getEvaluated() != true){
+            return false;
+        }
+        s = s->getNextNode();
+    }
+    return true;
+}
+
 void graph::printGraph(){
     node * n = this->start_node;
-
+    cout << "( id, weight )\n";
     if( n != NULL ){
         while( n->getNextNode() != NULL ){
             n->print();

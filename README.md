@@ -5,7 +5,7 @@ This repository aims to present the modified Dijkstra algorithm to find the smal
 The Dijkstra algorithm, designed to solve the problem of the shortest path in a directed or non-directed graph with non-negative weight edges, at computational time *O ([m + n] log n)* where m is the number of edges n is the number of vertices
 
 # Input file
-the input file must be placed inside the input folder. The input file must be mounted as follows:
+the input file must be placed inside input folder. The input file must be mounted as follows:
 
 - in the first line the number of nodes must be reported;
 - in the second row the number of edges;

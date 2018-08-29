@@ -14,12 +14,15 @@ graph * dataReader::readGraph(const string file_path){
         g = new graph();
         int id_node;
         string start_restriction_time, end_restriction_time;
+        string departureTime;
 
         file >> this->num_nodes;
         file >> this->num_edges;
         file >> this->sorce_node;
         file >> this->destiny_node;
-        file >> this->departure_time;
+        file >> departureTime;
+
+        this->departure_time = new timestamp(stoi(departureTime.substr(0, 2)), stoi(departureTime.substr(2, 4)));
 
         timestamp *start_restriction, *end_restriction;
 
