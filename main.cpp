@@ -62,7 +62,7 @@ float dijkstra_timetable(graph * g, int id_source, int id_destiny, timestamp * d
     //initializes the cost vector
     for(int i = 0; i < num_nodes; i++){
         if(i == id_source-1){
-            g->getNode(i+1)->setDistance(0);
+            g->getNode(i+1)->setDistance(departure_time->in_minutes());
         }else{
             g->getNode(i+1)->setDistance(INFINITY);
         }
@@ -86,7 +86,7 @@ float dijkstra_timetable(graph * g, int id_source, int id_destiny, timestamp * d
             //cout << "("<< g->current()->current()->getIdDestinyNode() << "," << g->current()->current()->getWeight()*60<< ")";
             distancia = no->current()->getWeight()*60;//custo aresta
             // custo  de esperar
-            minuto_chegada = (no->getDistance() + no->current()->getWeight()*60) % 1440;
+            minuto_chegada = (no->getDistance() + no->current()->getWeight()*60) % 1440; // minuto relativo ao inicio do dia
             distancia += g->getNode(no->current()->getIdDestinyNode())->time_waiting( minuto_chegada ) ;
             //quanto já custava
             distancia += no->getDistance();
@@ -106,9 +106,7 @@ float dijkstra_timetable(graph * g, int id_source, int id_destiny, timestamp * d
     cout << "HORA DA CHEGADA: ";
     print_minutos_2_hours(g->getNode(num_nodes)->getDistance());
     cout << endl;
-
-    cout << "CUSTO TOTAL EM HORAS: ";
-    print_minutos_2_hours(g->getNode(num_nodes)->getDistance() - departure_time->in_minutes());
+    cout << "CUSTO TOTAL EM HORAS: " << (g->getNode(num_nodes)->getDistance() - departure_time->in_minutes())/60  << ":" <<  (g->getNode(num_nodes)->getDistance() - departure_time->in_minutes())%60;
     cout << endl;
 }
 
@@ -125,7 +123,7 @@ float dijkstra(graph * g, int id_source, int id_destiny, timestamp * departure_t
     //initializes the cost vector
     for(int i = 0; i < num_nodes; i++){
         if(i == id_source-1){
-            cost[i] = 0;
+            cost[i] = departure_time->in_minutes();
         }else{
             cost[i] = INFINITY;
         }
